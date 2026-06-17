@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archimate:model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:archimate="http://www.archimatetool.com/archimate" name="C1F1 ArchiTrain" id="model-architrain" version="5.0.0">
+  <folder name="Strategy" id="id-3ad4fe5c823d401a950fa49132bb874f" type="strategy"/>
+  <folder name="Business" id="folder-business" type="business">
+    <element xsi:type="archimate:BusinessActor" name="Passenger" id="b-passenger"/>
+    <element xsi:type="archimate:BusinessRole" name="Customer Support Staff" id="b-css"/>
+    <element xsi:type="archimate:BusinessRole" name="Operations Controller" id="b-controller"/>
+    <element xsi:type="archimate:BusinessRole" name="Train Operator" id="b-trainop"/>
+    <element xsi:type="archimate:BusinessCollaboration" name="Malfunction Management" id="b-malf"/>
+    <element xsi:type="archimate:BusinessService" name="Ticketing &amp; Fare Service" id="b-svc-ticket"/>
+    <element xsi:type="archimate:BusinessService" name="Train Operation &amp; Tracking Service" id="b-svc-track"/>
+    <element xsi:type="archimate:BusinessService" name="Passenger Information Service" id="b-svc-info"/>
+    <element xsi:type="archimate:BusinessService" name="Go Card Self-Service" id="b-svc-self"/>
+    <element xsi:type="archimate:BusinessService" name="On-site Support Service" id="b-svc-support"/>
+    <element xsi:type="archimate:BusinessProcess" name="Handle Journeys &amp; Fares" id="b-proc-journey"/>
+    <element xsi:type="archimate:BusinessProcess" name="Localize &amp; Monitor Trains" id="b-proc-local"/>
+    <element xsi:type="archimate:BusinessProcess" name="Handle Delays &amp; Disruptions" id="b-proc-delay"/>
+    <element xsi:type="archimate:BusinessProcess" name="Conduct Journey" id="b-proc-conduct"/>
+    <element xsi:type="archimate:BusinessProcess" name="Tap On" id="b-proc-tapon"/>
+    <element xsi:type="archimate:BusinessProcess" name="Tap Off" id="b-proc-tapoffp"/>
+    <element xsi:type="archimate:BusinessProcess" name="Calculate Fare" id="b-proc-calcfare"/>
+    <element xsi:type="archimate:BusinessProcess" name="Determine Zones" id="b-proc-zones"/>
+    <element xsi:type="archimate:BusinessProcess" name="Calculate Zone-based Fare" id="b-proc-zonefare"/>
+    <element xsi:type="archimate:BusinessProcess" name="Charge Go Card Balance" id="b-proc-charge"/>
+    <element xsi:type="archimate:BusinessProcess" name="Aggregate Daily Fares &amp; Request Payment" id="b-proc-aggr"/>
+    <element xsi:type="archimate:BusinessProcess" name="Apply Default Fare" id="b-proc-default"/>
+    <element xsi:type="archimate:BusinessProcess" name="Manage Go Card" id="b-proc-manage"/>
+    <element xsi:type="archimate:BusinessProcess" name="Top up Online" id="b-proc-topon"/>
+    <element xsi:type="archimate:BusinessProcess" name="Top up On-site" id="b-proc-topsite"/>
+    <element xsi:type="archimate:BusinessProcess" name="Register Go Card" id="b-proc-register"/>
+    <element xsi:type="archimate:BusinessProcess" name="Process Refund" id="b-proc-refund"/>
+    <element xsi:type="archimate:BusinessEvent" name="Tap-on Event Created" id="b-ev-tapon"/>
+    <element xsi:type="archimate:BusinessEvent" name="Tap-off Event Created" id="b-ev-tapoff"/>
+    <element xsi:type="archimate:BusinessEvent" name="Delay exceeds threshold" id="b-ev-threshold"/>
+    <element xsi:type="archimate:BusinessEvent" name="Tap-off not received + 24h timeout" id="b-ev-timeout"/>
+    <element xsi:type="archimate:BusinessObject" name="Journey / Digital Ticket" id="b-obj-ticket"/>
+    <element xsi:type="archimate:BusinessObject" name="Go Card Account" id="b-obj-account"/>
+    <element xsi:type="archimate:BusinessEvent" name=" Tap-on/off Event Created" id="id-9a8433d3e858498eb7548d5817a29695"/>
+    <element xsi:type="archimate:BusinessEvent" name="Journey Exception Event" id="id-f51b7caf17c14c2c9e28683e0c027b44"/>
+    <element xsi:type="archimate:BusinessObject" name="Journey Record" id="id-6753a4dc7fab44da860132465274c838"/>
+    <element xsi:type="archimate:BusinessObject" name="Delay Status" id="id-6f5528e2862c452584fb223c668b3c3a"/>
+  </folder>
+  <folder name="Application" id="folder-application" type="application">
+    <element xsi:type="archimate:ApplicationComponent" name="ArchiTrain Website" id="a-website"/>
+    <element xsi:type="archimate:ApplicationComponent" name="Journey &amp; Account Management System" id="a-jams"/>
+    <element xsi:type="archimate:ApplicationComponent" name="Fare Management System" id="a-fms"/>
+    <element xsi:type="archimate:ApplicationComponent" name="Validation Management" id="a-vm"/>
+    <element xsi:type="archimate:ApplicationComponent" name="Access Control Management" id="a-acm"/>
+    <element xsi:type="archimate:ApplicationComponent" name="Operational Control Center" id="a-occ"/>
+    <element xsi:type="archimate:ApplicationComponent" name="Passenger Information System" id="a-pis"/>
+    <element xsi:type="archimate:ApplicationComponent" name="Train Management System" id="a-tms"/>
+    <element xsi:type="archimate:ApplicationComponent" name="Disruption Handling System" id="a-dhs"/>
+    <element xsi:type="archimate:ApplicationComponent" name="LCCU Control Software" id="a-lccu-sw"/>
+    <element xsi:type="archimate:ApplicationService" name="Fare Calculation Service" id="a-svc-fare"/>
+    <element xsi:type="archimate:ApplicationService" name="Train Tracking Service" id="a-svc-track"/>
+    <element xsi:type="archimate:ApplicationService" name="Delay Notification Service" id="a-svc-delay"/>
+    <element xsi:type="archimate:ApplicationService" name="Gate Control Service" id="a-svc-gate"/>
+    <element xsi:type="archimate:ApplicationService" name="Tap Event Recording Service" id="a-svc-record"/>
+    <element xsi:type="archimate:ApplicationService" name="Balance &amp; Top-up Service" id="a-svc-balance"/>
+    <element xsi:type="archimate:ApplicationService" name="Bank Payment Service (external)" id="a-svc-bank"/>
+    <element xsi:type="archimate:DataObject" name="Tap Event Data" id="a-do-tap"/>
+    <element xsi:type="archimate:DataObject" name="Digital Ticket" id="a-do-ticket"/>
+    <element xsi:type="archimate:DataObject" name="Fare &amp; Zone Data" id="a-do-farezone"/>
+    <element xsi:type="archimate:DataObject" name="Go Card Account Data" id="a-do-account"/>
+    <element xsi:type="archimate:DataObject" name="Journey Record" id="id-81a847eaee684234bd7a085a5de37733"/>
+  </folder>
+  <folder name="Technology &amp; Physical" id="folder-technology" type="technology">
+    <element xsi:type="archimate:Node" name="Station Infrastructure" id="t-station"/>
+    <element xsi:type="archimate:Node" name="LCCU (On-board Systems)" id="t-lccu"/>
+    <element xsi:type="archimate:Node" name="Central Railway Backend" id="t-backend"/>
+    <element xsi:type="archimate:Node" name="Application Server" id="t-appserver"/>
+    <element xsi:type="archimate:Node" name="Journey &amp; Account Mgmt Backend" id="t-jams-node"/>
+    <element xsi:type="archimate:Device" name="Station Gate" id="t-gate"/>
+    <element xsi:type="archimate:Device" name="NFC Reader (embedded)" id="t-nfc"/>
+    <element xsi:type="archimate:Device" name="Platform NFC Reader" id="t-platform-nfc"/>
+    <element xsi:type="archimate:Device" name="Go Card" id="t-card"/>
+    <element xsi:type="archimate:Device" name="Mobile Wallet / Bank Card" id="t-wallet"/>
+    <element xsi:type="archimate:CommunicationNetwork" name="Private Network" id="t-net-priv"/>
+    <element xsi:type="archimate:CommunicationNetwork" name="Railway Radio" id="t-net-radio"/>
+    <element xsi:type="archimate:Path" name="NFC Handshake" id="t-path-nfc"/>
+    <element xsi:type="archimate:Path" name="Gate-Backend Link" id="t-path-link"/>
+    <element xsi:type="archimate:SystemSoftware" name="Database (DBMS)" id="t-db"/>
+    <element xsi:type="archimate:Artifact" name="Journey &amp; Account Database" id="t-artifact"/>
+    <element xsi:type="archimate:Artifact" name="Website Deployment" id="t-art-web"/>
+    <element xsi:type="archimate:TechnologyService" name="Data Storage Service" id="t-svc-storage"/>
+    <element xsi:type="archimate:SystemSoftware" id="id-752061405ccb41768457e6d2faf2bf62"/>
+    <element xsi:type="archimate:SystemSoftware" name="GPS / Reference Signal Source" id="id-4f42fe0cbbb6421696747a9deb8e9ad6"/>
+    <element xsi:type="archimate:SystemSoftware" name="Central Computing Cluster" id="id-223860b369524cfd90142b2bef537df9"/>
+    <element xsi:type="archimate:Node" name="Multi-modal On-board Sensor Group" id="id-16de9ab873194eb89212e799532f52aa"/>
+    <element xsi:type="archimate:Node" name="GPS / Reference Signal Source" id="id-c90ece74302043d2a41a5c5016399ae3"/>
+  </folder>
+  <folder name="Motivation" id="id-38a30fd1ee514ee9901f6b7184a70732" type="motivation"/>
+  <folder name="Implementation &amp; Migration" id="id-8e701195ba5642e39642cdac08e86ebb" type="implementation_migration"/>
+  <folder name="Other" id="folder-other" type="other">
+    <element xsi:type="archimate:Junction" id="j-payment" type="or"/>
+  </folder>
+  <folder name="Relations" id="folder-relations" type="relations">
+    <element xsi:type="archimate:ServingRelationship" id="r01" source="b-svc-ticket" target="b-passenger"/>
+    <element xsi:type="archimate:ServingRelationship" id="r02" source="b-svc-track" target="b-passenger"/>
+    <element xsi:type="archimate:ServingRelationship" id="r03" source="b-svc-info" target="b-passenger"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r04" source="b-proc-journey" target="b-svc-ticket"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r05" source="b-proc-local" target="b-svc-track"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r06" source="b-proc-delay" target="b-svc-info"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r07" source="b-passenger" target="b-proc-journey"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r08" source="b-css" target="b-proc-journey"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r09" source="b-controller" target="b-proc-delay"/>
+    <element xsi:type="archimate:AggregationRelationship" id="r10" source="b-malf" target="b-controller"/>
+    <element xsi:type="archimate:AggregationRelationship" id="r11" source="b-malf" target="b-trainop"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r12" source="b-malf" target="b-proc-delay"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="r13" source="b-ev-tapoff" target="b-proc-journey"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="r14" source="b-ev-threshold" target="b-proc-delay"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r15" source="a-fms" target="a-svc-fare"/>
+    <element xsi:type="archimate:ServingRelationship" id="r16" source="a-svc-fare" target="b-proc-journey"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r17" source="a-acm" target="a-svc-gate"/>
+    <element xsi:type="archimate:ServingRelationship" id="r18" source="a-svc-gate" target="b-proc-journey"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r19" source="a-occ" target="a-svc-track"/>
+    <element xsi:type="archimate:ServingRelationship" id="r20" source="a-svc-track" target="b-proc-local"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r21" source="a-occ" target="a-svc-delay"/>
+    <element xsi:type="archimate:ServingRelationship" id="r22" source="a-svc-delay" target="b-proc-delay"/>
+    <element xsi:type="archimate:FlowRelationship" name="position data" id="r23" source="a-lccu-sw" target="a-occ"/>
+    <element xsi:type="archimate:AggregationRelationship" id="r24" source="a-dhs" target="a-occ"/>
+    <element xsi:type="archimate:AggregationRelationship" id="r25" source="a-dhs" target="a-pis"/>
+    <element xsi:type="archimate:AggregationRelationship" id="r26" source="a-dhs" target="a-tms"/>
+    <element xsi:type="archimate:FlowRelationship" name="connection updates" id="r27" source="a-occ" target="a-pis"/>
+    <element xsi:type="archimate:FlowRelationship" name="operational updates" id="r28" source="a-occ" target="a-tms"/>
+    <element xsi:type="archimate:FlowRelationship" name="schedule updates" id="r29" source="a-pis" target="a-website"/>
+    <element xsi:type="archimate:ServingRelationship" id="r30" source="a-jams" target="a-fms"/>
+    <element xsi:type="archimate:ServingRelationship" id="r31" source="a-jams" target="a-website"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r32" source="t-station" target="a-acm"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r33" source="t-backend" target="a-occ"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r34" source="t-backend" target="a-pis"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r35" source="t-backend" target="a-tms"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r36" source="t-lccu" target="a-lccu-sw"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r37" source="t-appserver" target="a-website"/>
+    <element xsi:type="archimate:AssociationRelationship" id="r38" source="t-net-radio" target="t-lccu"/>
+    <element xsi:type="archimate:AssociationRelationship" id="r39" source="t-net-radio" target="t-backend"/>
+    <element xsi:type="archimate:AssociationRelationship" id="r40" source="t-net-priv" target="t-station"/>
+    <element xsi:type="archimate:AssociationRelationship" id="r41" source="t-net-priv" target="t-backend"/>
+    <element xsi:type="archimate:ServingRelationship" id="r42" source="a-svc-bank" target="a-fms"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r43" source="t-jams-node" target="a-jams"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r44" source="t-jams-node" target="a-fms"/>
+    <element xsi:type="archimate:AssociationRelationship" id="r45" source="t-net-priv" target="t-jams-node"/>
+    <element xsi:type="archimate:ServingRelationship" id="r50" source="b-svc-self" target="b-passenger"/>
+    <element xsi:type="archimate:ServingRelationship" id="r51" source="b-svc-support" target="b-passenger"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r52" source="a-website" target="b-svc-self"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r53" source="b-css" target="b-svc-support"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r54" source="b-proc-conduct" target="b-proc-tapon"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r55" source="b-proc-conduct" target="b-proc-tapoffp"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="r56" source="b-proc-tapon" target="b-proc-tapoffp"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="r57" source="b-proc-tapon" target="b-ev-tapon"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="r58" source="b-proc-tapoffp" target="b-ev-tapoff"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="r59" source="b-ev-tapoff" target="b-proc-calcfare"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r60" source="b-proc-calcfare" target="b-proc-zones"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r61" source="b-proc-calcfare" target="b-proc-zonefare"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r62" source="b-proc-calcfare" target="b-proc-charge"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r63" source="b-proc-calcfare" target="b-proc-aggr"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r64" source="b-proc-calcfare" target="b-proc-default"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="r65" source="b-proc-zones" target="b-proc-zonefare"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="r66" source="b-proc-zonefare" target="j-payment"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="r67" source="j-payment" target="b-proc-charge"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="r68" source="j-payment" target="b-proc-aggr"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="r69" source="b-ev-timeout" target="b-proc-default"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r70" source="b-proc-manage" target="b-proc-topon"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r71" source="b-proc-manage" target="b-proc-topsite"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r72" source="b-proc-manage" target="b-proc-register"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r73" source="b-proc-manage" target="b-proc-refund"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r74" source="b-passenger" target="b-proc-conduct"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r75" source="b-css" target="b-proc-manage"/>
+    <element xsi:type="archimate:AccessRelationship" id="r78" source="b-proc-calcfare" target="b-obj-ticket"/>
+    <element xsi:type="archimate:AccessRelationship" id="r79" source="b-proc-charge" target="b-obj-account" accessType="3"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r80" source="b-proc-conduct" target="b-svc-ticket"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="r81" source="b-proc-default" target="j-payment"/>
+    <element xsi:type="archimate:ServingRelationship" id="r82" source="a-svc-gate" target="b-proc-tapon"/>
+    <element xsi:type="archimate:ServingRelationship" id="r83" source="a-svc-gate" target="b-proc-tapoffp"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r84" source="a-jams" target="a-svc-record"/>
+    <element xsi:type="archimate:ServingRelationship" id="r85" source="a-svc-record" target="b-proc-conduct"/>
+    <element xsi:type="archimate:ServingRelationship" id="r86" source="a-svc-fare" target="b-proc-calcfare"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r87" source="a-fms" target="a-vm"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r88" source="a-website" target="a-svc-balance"/>
+    <element xsi:type="archimate:ServingRelationship" id="r89" source="a-svc-balance" target="b-proc-topon"/>
+    <element xsi:type="archimate:FlowRelationship" name="tap events" id="r90" source="a-acm" target="a-jams"/>
+    <element xsi:type="archimate:AccessRelationship" id="r91" source="a-jams" target="a-do-tap"/>
+    <element xsi:type="archimate:AccessRelationship" id="r92" source="a-fms" target="a-do-tap" accessType="1"/>
+    <element xsi:type="archimate:AccessRelationship" id="r93" source="a-fms" target="a-do-farezone" accessType="1"/>
+    <element xsi:type="archimate:AccessRelationship" id="r94" source="a-fms" target="a-do-ticket"/>
+    <element xsi:type="archimate:AccessRelationship" id="r95" source="a-jams" target="a-do-account" accessType="3"/>
+    <element xsi:type="archimate:AccessRelationship" id="r96" source="a-website" target="a-do-account" accessType="3"/>
+    <element xsi:type="archimate:AccessRelationship" id="r97" source="a-website" target="a-do-ticket" accessType="1"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r98" source="a-do-ticket" target="b-obj-ticket"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r99" source="a-do-account" target="b-obj-account"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="r100" source="a-vm" target="b-ev-timeout"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r110" source="t-gate" target="t-nfc"/>
+    <element xsi:type="archimate:AssociationRelationship" id="r111" source="t-path-nfc" target="t-nfc"/>
+    <element xsi:type="archimate:AssociationRelationship" id="r112" source="t-path-nfc" target="t-card"/>
+    <element xsi:type="archimate:AssociationRelationship" id="r113" source="t-path-nfc" target="t-wallet"/>
+    <element xsi:type="archimate:AssociationRelationship" id="r114" source="t-path-nfc" target="t-platform-nfc"/>
+    <element xsi:type="archimate:AssociationRelationship" id="r115" source="t-path-link" target="t-gate"/>
+    <element xsi:type="archimate:AssociationRelationship" id="r116" source="t-path-link" target="t-jams-node"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r117" source="t-net-priv" target="t-path-link"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="r118" source="t-gate" target="a-acm"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r119" source="t-station" target="t-gate"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r120" source="t-station" target="t-platform-nfc"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r121" source="t-jams-node" target="t-db"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r122" source="t-jams-node" target="t-artifact"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r123" source="t-artifact" target="a-do-tap"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r124" source="t-artifact" target="a-do-account"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r125" source="t-artifact" target="a-do-farezone"/>
+    <element xsi:type="archimate:CompositionRelationship" id="r129" source="t-appserver" target="t-art-web"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r130" source="t-art-web" target="a-website"/>
+    <element xsi:type="archimate:RealizationRelationship" id="r131" source="t-jams-node" target="t-svc-storage"/>
+    <element xsi:type="archimate:ServingRelationship" id="r132" source="t-svc-storage" target="a-jams"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="id-2e650ff21d8743ef947bc75b55d07f8f" source="id-9a8433d3e858498eb7548d5817a29695" target="b-proc-journey"/>
+    <element xsi:type="archimate:ServingRelationship" id="id-7166e97506c1435d8c137189c200c8cf" source="id-f51b7caf17c14c2c9e28683e0c027b44" target="b-proc-journey"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="id-d786948acfa3432da4beb50d1ef49326" source="id-f51b7caf17c14c2c9e28683e0c027b44" target="b-proc-journey"/>
+    <element xsi:type="archimate:ServingRelationship" id="id-d0669b0436f242db9c48e6d7ebd117ba" source="id-4f42fe0cbbb6421696747a9deb8e9ad6" target="t-lccu"/>
+    <element xsi:type="archimate:ServingRelationship" id="id-b9b40d3dd08f44b2bad88dfa125ebd82" source="id-752061405ccb41768457e6d2faf2bf62" target="t-lccu"/>
+    <element xsi:type="archimate:AccessRelationship" id="id-07929afc3d2f47e8ad3740e0eb545144" source="a-svc-fare" target="id-6753a4dc7fab44da860132465274c838"/>
+    <element xsi:type="archimate:AccessRelationship" id="id-7dce46e8c38249c7b52bdcf394403b93" source="id-9a8433d3e858498eb7548d5817a29695" target="id-6753a4dc7fab44da860132465274c838"/>
+    <element xsi:type="archimate:AccessRelationship" id="id-6ff28d206b61440187b00cf94173630e" source="b-svc-info" target="id-6f5528e2862c452584fb223c668b3c3a"/>
+    <element xsi:type="archimate:AccessRelationship" id="id-a41462c2f574470284793125eaad2ed8" source="a-tms" target="id-6f5528e2862c452584fb223c668b3c3a"/>
+    <element xsi:type="archimate:ServingRelationship" id="id-e220130cad0045948365ff86ad0cea66" source="id-16de9ab873194eb89212e799532f52aa" target="t-lccu"/>
+    <element xsi:type="archimate:ServingRelationship" id="id-5c8ad39c98ad44778607d96b203fe387" source="id-c90ece74302043d2a41a5c5016399ae3" target="t-lccu"/>
+    <element xsi:type="archimate:AccessRelationship" id="id-11144c7943b6410b843331d16c1a2dca" source="b-controller" target="id-6f5528e2862c452584fb223c668b3c3a"/>
+  </folder>
+  <folder name="Views" id="folder-views" type="diagrams">
+    <element xsi:type="archimate:ArchimateDiagramModel" name="Abstract Model" id="view-abstract">
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-b-css" archimateElement="b-css">
+        <bounds x="40" y="20" width="190" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r08" source="view-abstract-b-css" target="view-abstract-b-proc-journey" archimateRelationship="r08">
+          <bendpoint startY="259" endX="-120"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-b-passenger" targetConnections="view-abstract-r01 view-abstract-r02 view-abstract-r03" archimateElement="b-passenger">
+        <bounds x="760" y="20" width="180" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r07" source="view-abstract-b-passenger" target="view-abstract-b-proc-journey" archimateRelationship="r07">
+          <bendpoint startY="100" endX="595" endY="-159"/>
+          <bendpoint startX="-430" startY="100" endX="165" endY="-159"/>
+          <bendpoint startX="-430" startY="247" endX="165" endY="-12"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-b-controller" targetConnections="view-abstract-r10" archimateElement="b-controller">
+        <bounds x="1180" y="20" width="190" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r09" source="view-abstract-b-controller" target="view-abstract-b-proc-delay" archimateRelationship="r09">
+          <bendpoint startY="259" endX="-120"/>
+        </sourceConnection>
+        <sourceConnection xsi:type="archimate:Connection" id="id-1d76f6fe30be47aca27b25285803a9bd" source="view-abstract-b-controller" target="id-cb0003410f904fb6833e6a4fdcf25fac" archimateRelationship="id-11144c7943b6410b843331d16c1a2dca"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-b-trainop" targetConnections="view-abstract-r11" archimateElement="b-trainop">
+        <bounds x="1390" y="20" width="180" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-b-malf" archimateElement="b-malf">
+        <bounds x="1031" y="180" width="210" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r10" source="view-abstract-b-malf" target="view-abstract-b-controller" archimateRelationship="r10"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r11" source="view-abstract-b-malf" target="view-abstract-b-trainop" archimateRelationship="r11"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r12" source="view-abstract-b-malf" target="view-abstract-b-proc-delay" archimateRelationship="r12"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-b-svc-ticket" targetConnections="view-abstract-r04" archimateElement="b-svc-ticket">
+        <bounds x="140" y="170" width="230" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r01" source="view-abstract-b-svc-ticket" target="view-abstract-b-passenger" archimateRelationship="r01">
+          <bendpoint startY="-57" endX="-595" endY="92"/>
+          <bendpoint startX="555" startY="-57" endX="-40" endY="92"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-b-svc-track" targetConnections="view-abstract-r05" archimateElement="b-svc-track">
+        <bounds x="770" y="170" width="220" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r02" source="view-abstract-b-svc-track" target="view-abstract-b-passenger" archimateRelationship="r02"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-b-svc-info" targetConnections="view-abstract-r06" archimateElement="b-svc-info">
+        <bounds x="1280" y="170" width="230" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r03" source="view-abstract-b-svc-info" target="view-abstract-b-passenger" archimateRelationship="r03">
+          <bendpoint startY="-105" endX="545" endY="44"/>
+          <bendpoint startX="-505" startY="-105" endX="40" endY="44"/>
+        </sourceConnection>
+        <sourceConnection xsi:type="archimate:Connection" id="id-8dfeda06c7124156a1ee54910a08edee" source="view-abstract-b-svc-info" target="id-cb0003410f904fb6833e6a4fdcf25fac" archimateRelationship="id-6ff28d206b61440187b00cf94173630e"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-b-proc-journey" targetConnections="view-abstract-r07 view-abstract-r08 view-abstract-r16 view-abstract-r18 id-82726fbec2c444a09ef6927aaeb29464 id-3b313f6843994d439698b7bcdfb6f293" archimateElement="b-proc-journey">
+        <bounds x="140" y="280" width="230" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r04" source="view-abstract-b-proc-journey" target="view-abstract-b-svc-ticket" archimateRelationship="r04"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-b-proc-local" targetConnections="view-abstract-r20" archimateElement="b-proc-local">
+        <bounds x="770" y="280" width="220" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r05" source="view-abstract-b-proc-local" target="view-abstract-b-svc-track" archimateRelationship="r05"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-b-proc-delay" targetConnections="view-abstract-r09 view-abstract-r12 view-abstract-r14 view-abstract-r22" archimateElement="b-proc-delay">
+        <bounds x="1280" y="280" width="230" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r06" source="view-abstract-b-proc-delay" target="view-abstract-b-svc-info" archimateRelationship="r06"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-b-ev-threshold" archimateElement="b-ev-threshold">
+        <bounds x="1080" y="360" width="170" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r14" source="view-abstract-b-ev-threshold" target="view-abstract-b-proc-delay" archimateRelationship="r14"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-svc-gate" targetConnections="view-abstract-r17" archimateElement="a-svc-gate">
+        <bounds x="40" y="440" width="180" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r18" source="view-abstract-a-svc-gate" target="view-abstract-b-proc-journey" archimateRelationship="r18"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-svc-fare" targetConnections="view-abstract-r15" archimateElement="a-svc-fare">
+        <bounds x="240" y="440" width="180" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r16" source="view-abstract-a-svc-fare" target="view-abstract-b-proc-journey" archimateRelationship="r16"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-9a11b4edf7014932b28ed399bb82ef11" source="view-abstract-a-svc-fare" target="id-3bcf247fcdbf4d359b6ace31d497ebb5" archimateRelationship="id-07929afc3d2f47e8ad3740e0eb545144"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-svc-track" targetConnections="view-abstract-r19" archimateElement="a-svc-track">
+        <bounds x="770" y="440" width="220" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r20" source="view-abstract-a-svc-track" target="view-abstract-b-proc-local" archimateRelationship="r20"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-svc-delay" targetConnections="view-abstract-r21" archimateElement="a-svc-delay">
+        <bounds x="1280" y="440" width="220" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r22" source="view-abstract-a-svc-delay" target="view-abstract-b-proc-delay" archimateRelationship="r22"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-acm" targetConnections="view-abstract-r32" archimateElement="a-acm">
+        <bounds x="40" y="540" width="180" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r17" source="view-abstract-a-acm" target="view-abstract-a-svc-gate" archimateRelationship="r17"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r90" source="view-abstract-a-acm" target="view-abstract-a-jams" archimateRelationship="r90"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-fms" targetConnections="view-abstract-r30 view-abstract-r42 view-abstract-r44" archimateElement="a-fms">
+        <bounds x="240" y="540" width="180" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r15" source="view-abstract-a-fms" target="view-abstract-a-svc-fare" archimateRelationship="r15"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-website" targetConnections="view-abstract-r31 view-abstract-r37" archimateElement="a-website">
+        <bounds x="440" y="540" width="180" height="60"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-jams" targetConnections="view-abstract-r43 view-abstract-r90" archimateElement="a-jams">
+        <bounds x="140" y="640" width="200" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r30" source="view-abstract-a-jams" target="view-abstract-a-fms" archimateRelationship="r30"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r31" source="view-abstract-a-jams" target="view-abstract-a-website" archimateRelationship="r31"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-svc-bank" archimateElement="a-svc-bank">
+        <bounds x="430" y="640" width="190" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r42" source="view-abstract-a-svc-bank" target="view-abstract-a-fms" archimateRelationship="r42"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-lccu-sw" targetConnections="view-abstract-r36" archimateElement="a-lccu-sw">
+        <bounds x="700" y="540" width="200" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r23" source="view-abstract-a-lccu-sw" target="view-abstract-a-occ" archimateRelationship="r23"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-occ" targetConnections="view-abstract-r23 view-abstract-r24 view-abstract-r33" archimateElement="a-occ">
+        <bounds x="1008" y="540" width="200" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r19" source="view-abstract-a-occ" target="view-abstract-a-svc-track" archimateRelationship="r19"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r21" source="view-abstract-a-occ" target="view-abstract-a-svc-delay" archimateRelationship="r21"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r27" source="view-abstract-a-occ" target="view-abstract-a-pis" archimateRelationship="r27"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r28" source="view-abstract-a-occ" target="view-abstract-a-tms" archimateRelationship="r28">
+          <bendpoint startX="60" startY="-45" endX="-390" endY="-45"/>
+          <bendpoint startX="450" startY="-45" endY="-45"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-pis" targetConnections="view-abstract-r25 view-abstract-r27 view-abstract-r34" archimateElement="a-pis">
+        <bounds x="1332" y="581" width="180" height="60"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-tms" targetConnections="view-abstract-r26 view-abstract-r28 view-abstract-r35" archimateElement="a-tms">
+        <bounds x="1632" y="552" width="180" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-e2f9b01f154846209d572c8cd42c4da1" source="view-abstract-a-tms" target="id-cb0003410f904fb6833e6a4fdcf25fac" archimateRelationship="id-a41462c2f574470284793125eaad2ed8"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-a-dhs" archimateElement="a-dhs">
+        <bounds x="1310" y="684" width="260" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r24" source="view-abstract-a-dhs" target="view-abstract-a-occ" archimateRelationship="r24"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r25" source="view-abstract-a-dhs" target="view-abstract-a-pis" archimateRelationship="r25"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r26" source="view-abstract-a-dhs" target="view-abstract-a-tms" archimateRelationship="r26"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-t-station" targetConnections="view-abstract-r40" archimateElement="t-station">
+        <bounds x="40" y="780" width="180" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r32" source="view-abstract-t-station" target="view-abstract-a-acm" archimateRelationship="r32"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-t-jams-node" targetConnections="view-abstract-r45" archimateElement="t-jams-node">
+        <bounds x="240" y="780" width="210" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r43" source="view-abstract-t-jams-node" target="view-abstract-a-jams" archimateRelationship="r43"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r44" source="view-abstract-t-jams-node" target="view-abstract-a-fms" archimateRelationship="r44">
+          <bendpoint startX="15" startY="-65" endX="30" endY="175"/>
+          <bendpoint startX="15" startY="-205" endX="30" endY="35"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-t-appserver" archimateElement="t-appserver">
+        <bounds x="470" y="780" width="180" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r37" source="view-abstract-t-appserver" target="view-abstract-a-website" archimateRelationship="r37">
+          <bendpoint startY="-65" endX="30" endY="175"/>
+          <bendpoint startX="80" startY="-65" endX="110" endY="175"/>
+          <bendpoint startX="80" startY="-235" endX="110" endY="5"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-t-lccu" targetConnections="view-abstract-r38 id-9b86c71ffe8f4fcd9b0f1691b56b75a1 id-19393001a10647c4ac36614b573419dc" archimateElement="t-lccu">
+        <bounds x="700" y="780" width="200" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r36" source="view-abstract-t-lccu" target="view-abstract-a-lccu-sw" archimateRelationship="r36"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-t-backend" targetConnections="view-abstract-r39 view-abstract-r41" archimateElement="t-backend">
+        <bounds x="920" y="780" width="210" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r33" source="view-abstract-t-backend" target="view-abstract-a-occ" archimateRelationship="r33"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r34" source="view-abstract-t-backend" target="view-abstract-a-pis" archimateRelationship="r34">
+          <bendpoint startX="105" startY="-60" endX="-140" endY="180"/>
+          <bendpoint startX="175" startY="-60" endX="-70" endY="180"/>
+          <bendpoint startX="175" startY="-205" endX="-70" endY="35"/>
+        </sourceConnection>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r35" source="view-abstract-t-backend" target="view-abstract-a-tms" archimateRelationship="r35">
+          <bendpoint startX="105" startY="-50" endX="-340" endY="190"/>
+          <bendpoint startX="515" startY="-50" endX="70" endY="190"/>
+          <bendpoint startX="515" startY="-205" endX="70" endY="35"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-t-net-priv" archimateElement="t-net-priv">
+        <bounds x="140" y="890" width="200" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r40" source="view-abstract-t-net-priv" target="view-abstract-t-station" archimateRelationship="r40"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r41" source="view-abstract-t-net-priv" target="view-abstract-t-backend" archimateRelationship="r41">
+          <bendpoint startX="110" startY="-45" endX="-675" endY="60"/>
+          <bendpoint startX="710" startY="-45" endX="-75" endY="60"/>
+          <bendpoint startX="710" startY="-70" endX="-75" endY="35"/>
+        </sourceConnection>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r45" source="view-abstract-t-net-priv" target="view-abstract-t-jams-node" archimateRelationship="r45"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-abstract-t-net-radio" archimateElement="t-net-radio">
+        <bounds x="939" y="890" width="200" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r38" source="view-abstract-t-net-radio" target="view-abstract-t-lccu" archimateRelationship="r38"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-abstract-r39" source="view-abstract-t-net-radio" target="view-abstract-t-backend" archimateRelationship="r39"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-f79cab89d85843c093a2eeb9b7ac0155" archimateElement="id-9a8433d3e858498eb7548d5817a29695">
+        <bounds x="470" y="264" width="130" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-82726fbec2c444a09ef6927aaeb29464" source="id-f79cab89d85843c093a2eeb9b7ac0155" target="view-abstract-b-proc-journey" archimateRelationship="id-2e650ff21d8743ef947bc75b55d07f8f"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-af3ed9b911d2407abdc6b1476a69db58" source="id-f79cab89d85843c093a2eeb9b7ac0155" target="id-3bcf247fcdbf4d359b6ace31d497ebb5" archimateRelationship="id-7dce46e8c38249c7b52bdcf394403b93"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-883fdabcd3724037b00003dc7a25b788" archimateElement="id-f51b7caf17c14c2c9e28683e0c027b44">
+        <bounds x="475" y="357" width="120" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-3b313f6843994d439698b7bcdfb6f293" source="id-883fdabcd3724037b00003dc7a25b788" target="view-abstract-b-proc-journey" archimateRelationship="id-d786948acfa3432da4beb50d1ef49326"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-3bcf247fcdbf4d359b6ace31d497ebb5" targetConnections="id-9a11b4edf7014932b28ed399bb82ef11 id-af3ed9b911d2407abdc6b1476a69db58" archimateElement="id-6753a4dc7fab44da860132465274c838">
+        <bounds x="599" y="437" width="120" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-cb0003410f904fb6833e6a4fdcf25fac" targetConnections="id-8dfeda06c7124156a1ee54910a08edee id-e2f9b01f154846209d572c8cd42c4da1 id-1d76f6fe30be47aca27b25285803a9bd" archimateElement="id-6f5528e2862c452584fb223c668b3c3a">
+        <bounds x="1586" y="372" width="120" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-0fbab288f0d741c2bceb2aa9295666fb" archimateElement="id-16de9ab873194eb89212e799532f52aa">
+        <bounds x="801" y="936" width="120" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-9b86c71ffe8f4fcd9b0f1691b56b75a1" source="id-0fbab288f0d741c2bceb2aa9295666fb" target="view-abstract-t-lccu" archimateRelationship="id-e220130cad0045948365ff86ad0cea66"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-263547847b2940449bc2a3bea7634125" archimateElement="id-c90ece74302043d2a41a5c5016399ae3">
+        <bounds x="636" y="936" width="120" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-19393001a10647c4ac36614b573419dc" source="id-263547847b2940449bc2a3bea7634125" target="view-abstract-t-lccu" archimateRelationship="id-5c8ad39c98ad44778607d96b203fe387"/>
+      </child>
+    </element>
+    <element xsi:type="archimate:ArchimateDiagramModel" name="Detailed Model - F1 Ticketing &amp; Train Journey Management" id="view-detail">
+      <child xsi:type="archimate:DiagramObject" id="view-detail-b-passenger" targetConnections="view-detail-r01 view-detail-r50 view-detail-r51" archimateElement="b-passenger">
+        <bounds x="620" y="20" width="180" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r74" source="view-detail-b-passenger" target="view-detail-b-proc-conduct" archimateRelationship="r74">
+          <bendpoint startY="147" endX="435" endY="-100"/>
+          <bendpoint startX="-435" startY="147" endY="-100"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-b-css" archimateElement="b-css">
+        <bounds x="1620" y="20" width="180" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r53" source="view-detail-b-css" target="view-detail-b-svc-support" archimateRelationship="r53"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r75" source="view-detail-b-css" target="view-detail-b-proc-manage" archimateRelationship="r75">
+          <bendpoint startX="-110" endX="60" endY="-268"/>
+          <bendpoint startX="-110" startY="147" endX="60" endY="-120"/>
+          <bendpoint startX="-170" startY="147" endY="-120"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-b-svc-ticket" targetConnections="view-detail-r80" archimateElement="b-svc-ticket">
+        <bounds x="240" y="110" width="220" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r01" source="view-detail-b-svc-ticket" target="view-detail-b-passenger" archimateRelationship="r01">
+          <bendpoint startY="-40" endX="-360" endY="47"/>
+          <bendpoint startX="310" startY="-40" endX="-50" endY="47"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-b-svc-self" targetConnections="view-detail-r52" archimateElement="b-svc-self">
+        <bounds x="1110" y="110" width="200" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r50" source="view-detail-b-svc-self" target="view-detail-b-passenger" archimateRelationship="r50">
+          <bendpoint startY="-43" endX="500" endY="44"/>
+          <bendpoint startX="-420" startY="-43" endX="80" endY="44"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-b-svc-support" targetConnections="view-detail-r53" archimateElement="b-svc-support">
+        <bounds x="1620" y="110" width="180" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r51" source="view-detail-b-svc-support" target="view-detail-b-passenger" archimateRelationship="r51">
+          <bendpoint startY="-47" endX="1000" endY="40"/>
+          <bendpoint startX="-1000" startY="-47" endY="40"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-conduct" targetConnections="view-detail-r74 view-detail-r85" archimateElement="b-proc-conduct">
+        <bounds x="40" y="220" width="470" height="150"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r80" source="view-detail-b-proc-conduct" target="view-detail-b-svc-ticket" archimateRelationship="r80"/>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-tapon" targetConnections="view-detail-r82" archimateElement="b-proc-tapon">
+          <bounds x="30" y="60" width="130" height="60"/>
+          <sourceConnection xsi:type="archimate:Connection" id="view-detail-r56" source="view-detail-b-proc-tapon" target="view-detail-b-proc-tapoffp" archimateRelationship="r56"/>
+          <sourceConnection xsi:type="archimate:Connection" id="view-detail-r57" source="view-detail-b-proc-tapon" target="view-detail-b-ev-tapon" archimateRelationship="r57">
+            <bendpoint startY="140" endX="-120" endY="-55"/>
+            <bendpoint startX="120" startY="140" endY="-55"/>
+          </sourceConnection>
+        </child>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-tapoffp" targetConnections="view-detail-r56 view-detail-r83" archimateElement="b-proc-tapoffp">
+          <bounds x="310" y="60" width="130" height="60"/>
+          <sourceConnection xsi:type="archimate:Connection" id="view-detail-r58" source="view-detail-b-proc-tapoffp" target="view-detail-b-ev-tapoff" archimateRelationship="r58">
+            <bendpoint startY="142" endX="-90" endY="-53"/>
+            <bendpoint startX="90" startY="142" endY="-53"/>
+          </sourceConnection>
+        </child>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-calcfare" targetConnections="view-detail-r59 view-detail-r86" archimateElement="b-proc-calcfare">
+        <bounds x="580" y="220" width="600" height="230"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r78" source="view-detail-b-proc-calcfare" target="view-detail-b-obj-ticket" archimateRelationship="r78">
+          <bendpoint startX="195" startY="130" endY="-40"/>
+        </sourceConnection>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-zones" archimateElement="b-proc-zones">
+          <bounds x="25" y="45" width="140" height="60"/>
+          <sourceConnection xsi:type="archimate:Connection" id="view-detail-r65" source="view-detail-b-proc-zones" target="view-detail-b-proc-zonefare" archimateRelationship="r65"/>
+        </child>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-zonefare" targetConnections="view-detail-r65" archimateElement="b-proc-zonefare">
+          <bounds x="190" y="45" width="170" height="60"/>
+          <sourceConnection xsi:type="archimate:Connection" id="view-detail-r66" source="view-detail-b-proc-zonefare" target="view-detail-j-payment" archimateRelationship="r66"/>
+        </child>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-j-payment" targetConnections="view-detail-r66 view-detail-r81" archimateElement="j-payment">
+          <bounds x="390" y="75" width="15" height="15"/>
+          <sourceConnection xsi:type="archimate:Connection" id="view-detail-r67" source="view-detail-j-payment" target="view-detail-b-proc-charge" archimateRelationship="r67"/>
+          <sourceConnection xsi:type="archimate:Connection" id="view-detail-r68" source="view-detail-j-payment" target="view-detail-b-proc-aggr" archimateRelationship="r68"/>
+        </child>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-charge" targetConnections="view-detail-r67" archimateElement="b-proc-charge">
+          <bounds x="430" y="30" width="150" height="60"/>
+          <sourceConnection xsi:type="archimate:Connection" id="view-detail-r79" source="view-detail-b-proc-charge" target="view-detail-b-obj-account" archimateRelationship="r79">
+            <bendpoint startX="115" endX="-440" endY="-225"/>
+            <bendpoint startX="115" startY="185" endX="-440" endY="-40"/>
+            <bendpoint startX="555" startY="185" endY="-40"/>
+          </sourceConnection>
+        </child>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-aggr" targetConnections="view-detail-r68" archimateElement="b-proc-aggr">
+          <bounds x="430" y="110" width="160" height="70"/>
+        </child>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-default" targetConnections="view-detail-r69" archimateElement="b-proc-default">
+          <bounds x="190" y="140" width="170" height="60"/>
+          <sourceConnection xsi:type="archimate:Connection" id="view-detail-r81" source="view-detail-b-proc-default" target="view-detail-j-payment" archimateRelationship="r81">
+            <bendpoint startX="122" endY="87"/>
+          </sourceConnection>
+        </child>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-manage" targetConnections="view-detail-r75" archimateElement="b-proc-manage">
+        <bounds x="1380" y="220" width="320" height="190"/>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-register" archimateElement="b-proc-register">
+          <bounds x="20" y="45" width="130" height="55"/>
+        </child>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-refund" archimateElement="b-proc-refund">
+          <bounds x="165" y="45" width="130" height="55"/>
+        </child>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-topon" targetConnections="view-detail-r89" archimateElement="b-proc-topon">
+          <bounds x="20" y="115" width="130" height="55"/>
+        </child>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-b-proc-topsite" archimateElement="b-proc-topsite">
+          <bounds x="165" y="115" width="130" height="55"/>
+        </child>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-b-ev-tapon" targetConnections="view-detail-r57" archimateElement="b-ev-tapon">
+        <bounds x="180" y="480" width="150" height="50"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-b-ev-tapoff" targetConnections="view-detail-r58" archimateElement="b-ev-tapoff">
+        <bounds x="440" y="480" width="130" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r59" source="view-detail-b-ev-tapoff" target="view-detail-b-proc-calcfare" archimateRelationship="r59">
+          <bendpoint startY="-45" endX="-375" endY="125"/>
+          <bendpoint startX="115" startY="-45" endX="-260" endY="125"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-b-ev-timeout" targetConnections="view-detail-r100" archimateElement="b-ev-timeout">
+        <bounds x="620" y="480" width="200" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r69" source="view-detail-b-ev-timeout" target="view-detail-b-proc-default" archimateRelationship="r69">
+          <bendpoint startY="-40" endX="-135" endY="75"/>
+          <bendpoint startX="135" startY="-40" endY="75"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-b-obj-ticket" targetConnections="view-detail-r78 view-detail-r98" archimateElement="b-obj-ticket">
+        <bounds x="1000" y="480" width="150" height="50"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-b-obj-account" targetConnections="view-detail-r79 view-detail-r99" archimateElement="b-obj-account">
+        <bounds x="1560" y="480" width="160" height="50"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-a-svc-gate" targetConnections="view-detail-r17" archimateElement="a-svc-gate">
+        <bounds x="40" y="620" width="180" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r82" source="view-detail-a-svc-gate" target="view-detail-b-proc-tapon" archimateRelationship="r82"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r83" source="view-detail-a-svc-gate" target="view-detail-b-proc-tapoffp" archimateRelationship="r83">
+          <bendpoint startY="-85" endX="-285" endY="250"/>
+          <bendpoint startX="285" startY="-85" endY="250"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-a-svc-record" targetConnections="view-detail-r84" archimateElement="a-svc-record">
+        <bounds x="260" y="620" width="200" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r85" source="view-detail-a-svc-record" target="view-detail-b-proc-conduct" archimateRelationship="r85">
+          <bendpoint startY="-195" endX="85" endY="155"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-a-svc-bank" archimateElement="a-svc-bank">
+        <bounds x="575" y="620" width="200" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r42" source="view-detail-a-svc-bank" target="view-detail-a-fms" archimateRelationship="r42"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-a-svc-fare" targetConnections="view-detail-r15" archimateElement="a-svc-fare">
+        <bounds x="795" y="620" width="190" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r86" source="view-detail-a-svc-fare" target="view-detail-b-proc-calcfare" archimateRelationship="r86"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-a-svc-balance" targetConnections="view-detail-r88" archimateElement="a-svc-balance">
+        <bounds x="1110" y="620" width="200" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r89" source="view-detail-a-svc-balance" target="view-detail-b-proc-topon" archimateRelationship="r89">
+          <bendpoint startY="-60" endX="-255" endY="222"/>
+          <bendpoint startX="255" startY="-60" endY="222"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-a-acm" targetConnections="view-detail-r118" archimateElement="a-acm">
+        <bounds x="40" y="700" width="180" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r17" source="view-detail-a-acm" target="view-detail-a-svc-gate" archimateRelationship="r17"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r90" source="view-detail-a-acm" target="view-detail-a-jams" archimateRelationship="r90"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-a-jams" targetConnections="view-detail-r43 view-detail-r90 view-detail-r132" archimateElement="a-jams">
+        <bounds x="260" y="700" width="220" height="65"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r30" source="view-detail-a-jams" target="view-detail-a-fms" archimateRelationship="r30"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r31" source="view-detail-a-jams" target="view-detail-a-website" archimateRelationship="r31">
+          <bendpoint startX="60" startY="-42" endX="-780" endY="-40"/>
+          <bendpoint startX="810" startY="-42" endX="-30" endY="-40"/>
+        </sourceConnection>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r84" source="view-detail-a-jams" target="view-detail-a-svc-record" archimateRelationship="r84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r91" source="view-detail-a-jams" target="view-detail-a-do-tap" archimateRelationship="r91"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r95" source="view-detail-a-jams" target="view-detail-a-do-account" archimateRelationship="r95">
+          <bendpoint startY="139" endX="-1275" endY="-35"/>
+          <bendpoint startX="1275" startY="139" endY="-35"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-a-fms" targetConnections="view-detail-r30 view-detail-r42 view-detail-r44" archimateElement="a-fms">
+        <bounds x="620" y="700" width="340" height="120"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r15" source="view-detail-a-fms" target="view-detail-a-svc-fare" archimateRelationship="r15">
+          <bendpoint startX="100" startY="-60" endY="55"/>
+        </sourceConnection>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r92" source="view-detail-a-fms" target="view-detail-a-do-tap" archimateRelationship="r92">
+          <bendpoint startX="-130" startY="85" endX="320" endY="-62"/>
+          <bendpoint startX="-450" startY="85" endY="-62"/>
+        </sourceConnection>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r93" source="view-detail-a-fms" target="view-detail-a-do-farezone" archimateRelationship="r93">
+          <bendpoint startX="-90" startY="95" endX="145" endY="-52"/>
+          <bendpoint startX="-235" startY="95" endY="-52"/>
+        </sourceConnection>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r94" source="view-detail-a-fms" target="view-detail-a-do-ticket" archimateRelationship="r94">
+          <bendpoint startX="110" startY="105" endX="-175" endY="-42"/>
+          <bendpoint startX="285" startY="105" endY="-42"/>
+        </sourceConnection>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-a-vm" archimateElement="a-vm">
+          <bounds x="80" y="55" width="180" height="50"/>
+          <sourceConnection xsi:type="archimate:Connection" id="view-detail-r100" source="view-detail-a-vm" target="view-detail-b-ev-timeout" archimateRelationship="r100">
+            <bendpoint startY="-220" endX="70" endY="55"/>
+            <bendpoint startX="-70" startY="-220" endY="55"/>
+          </sourceConnection>
+        </child>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-a-website" targetConnections="view-detail-r31 view-detail-r37 view-detail-r130" archimateElement="a-website">
+        <bounds x="1110" y="700" width="200" height="60"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r52" source="view-detail-a-website" target="view-detail-b-svc-self" archimateRelationship="r52">
+          <bendpoint startX="120" startY="-40" endX="120" endY="555"/>
+          <bendpoint startX="120" startY="-595" endX="120"/>
+        </sourceConnection>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r88" source="view-detail-a-website" target="view-detail-a-svc-balance" archimateRelationship="r88"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r96" source="view-detail-a-website" target="view-detail-a-do-account" archimateRelationship="r96">
+          <bendpoint startX="20" startY="115" endX="-415" endY="-62"/>
+          <bendpoint startX="435" startY="115" endY="-62"/>
+        </sourceConnection>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r97" source="view-detail-a-website" target="view-detail-a-do-ticket" archimateRelationship="r97">
+          <bendpoint startX="-20" startY="125" endX="115" endY="-52"/>
+          <bendpoint startX="-135" startY="125" endY="-52"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-a-do-tap" targetConnections="view-detail-r91 view-detail-r92" archimateElement="a-do-tap">
+        <bounds x="260" y="880" width="160" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-a-do-farezone" targetConnections="view-detail-r93" archimateElement="a-do-farezone">
+        <bounds x="470" y="880" width="170" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-a-do-ticket" targetConnections="view-detail-r94 view-detail-r97" archimateElement="a-do-ticket">
+        <bounds x="1000" y="880" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r98" source="view-detail-a-do-ticket" target="view-detail-b-obj-ticket" archimateRelationship="r98"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-a-do-account" targetConnections="view-detail-r95 view-detail-r96 view-detail-r124" archimateElement="a-do-account">
+        <bounds x="1560" y="880" width="170" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r99" source="view-detail-a-do-account" target="view-detail-b-obj-account" archimateRelationship="r99"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-t-card" targetConnections="view-detail-r112" archimateElement="t-card">
+        <bounds x="40" y="1000" width="150" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-t-wallet" targetConnections="view-detail-r113" archimateElement="t-wallet">
+        <bounds x="40" y="1080" width="170" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-t-path-nfc" archimateElement="t-path-nfc">
+        <bounds x="260" y="1040" width="140" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r111" source="view-detail-t-path-nfc" target="view-detail-t-nfc" archimateRelationship="r111"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r112" source="view-detail-t-path-nfc" target="view-detail-t-card" archimateRelationship="r112"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r113" source="view-detail-t-path-nfc" target="view-detail-t-wallet" archimateRelationship="r113"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r114" source="view-detail-t-path-nfc" target="view-detail-t-platform-nfc" archimateRelationship="r114"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-t-platform-nfc" targetConnections="view-detail-r114" archimateElement="t-platform-nfc">
+        <bounds x="260" y="1130" width="180" height="50"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-t-gate" targetConnections="view-detail-r115" archimateElement="t-gate">
+        <bounds x="470" y="1000" width="220" height="130"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r118" source="view-detail-t-gate" target="view-detail-a-acm" archimateRelationship="r118">
+          <bendpoint startY="-90" endX="450" endY="245"/>
+          <bendpoint startX="-450" startY="-90" endY="245"/>
+        </sourceConnection>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-t-nfc" targetConnections="view-detail-r111" archimateElement="t-nfc">
+          <bounds x="30" y="55" width="160" height="55"/>
+        </child>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-t-svc-storage" targetConnections="view-detail-r131" archimateElement="t-svc-storage">
+        <bounds x="740" y="940" width="180" height="45"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r132" source="view-detail-t-svc-storage" target="view-detail-a-jams" archimateRelationship="r132">
+          <bendpoint startY="-25" endX="460" endY="204"/>
+          <bendpoint startX="-590" startY="-25" endX="-130" endY="204"/>
+          <bendpoint startX="-590" startY="-229" endX="-130"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-t-path-link" targetConnections="view-detail-r117" archimateElement="t-path-link">
+        <bounds x="740" y="1020" width="150" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r115" source="view-detail-t-path-link" target="view-detail-t-gate" archimateRelationship="r115"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r116" source="view-detail-t-path-link" target="view-detail-t-jams-node" archimateRelationship="r116"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-t-net-priv" archimateElement="t-net-priv">
+        <bounds x="740" y="1100" width="190" height="50"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r45" source="view-detail-t-net-priv" target="view-detail-t-jams-node" archimateRelationship="r45"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r117" source="view-detail-t-net-priv" target="view-detail-t-path-link" archimateRelationship="r117"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-t-jams-node" targetConnections="view-detail-r45 view-detail-r116" archimateElement="t-jams-node">
+        <bounds x="950" y="1010" width="340" height="190"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r43" source="view-detail-t-jams-node" target="view-detail-a-jams" archimateRelationship="r43">
+          <bendpoint startX="-100" startY="-120" endX="650" endY="252"/>
+          <bendpoint startX="-675" startY="-120" endX="75" endY="252"/>
+          <bendpoint startX="-675" startY="-335" endX="75" endY="37"/>
+        </sourceConnection>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r44" source="view-detail-t-jams-node" target="view-detail-a-fms" archimateRelationship="r44">
+          <bendpoint startY="-115" endX="330" endY="230"/>
+          <bendpoint startX="-190" startY="-115" endX="140" endY="230"/>
+          <bendpoint startX="-190" startY="-280" endX="140" endY="65"/>
+        </sourceConnection>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r131" source="view-detail-t-jams-node" target="view-detail-t-svc-storage" archimateRelationship="r131"/>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-t-db" archimateElement="t-db">
+          <bounds x="25" y="50" width="140" height="55"/>
+        </child>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-t-artifact" archimateElement="t-artifact">
+          <bounds x="180" y="50" width="145" height="60"/>
+          <sourceConnection xsi:type="archimate:Connection" id="view-detail-r124" source="view-detail-t-artifact" target="view-detail-a-do-account" archimateRelationship="r124">
+            <bendpoint startY="-90" endX="-443" endY="92"/>
+            <bendpoint startX="442" startY="-90" endY="92"/>
+          </sourceConnection>
+        </child>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="view-detail-t-appserver" archimateElement="t-appserver">
+        <bounds x="1340" y="1010" width="280" height="150"/>
+        <sourceConnection xsi:type="archimate:Connection" id="view-detail-r37" source="view-detail-t-appserver" target="view-detail-a-website" archimateRelationship="r37">
+          <bendpoint startY="-90" endX="270" endY="265"/>
+          <bendpoint startX="-270" startY="-90" endY="265"/>
+        </sourceConnection>
+        <child xsi:type="archimate:DiagramObject" id="view-detail-t-art-web" archimateElement="t-art-web">
+          <bounds x="45" y="55" width="190" height="55"/>
+          <sourceConnection xsi:type="archimate:Connection" id="view-detail-r130" source="view-detail-t-art-web" target="view-detail-a-website" archimateRelationship="r130">
+            <bendpoint startX="-20" startY="-102" endX="250" endY="260"/>
+            <bendpoint startX="-290" startY="-102" endX="-20" endY="260"/>
+            <bendpoint startX="-290" startY="-327" endX="-20" endY="35"/>
+          </sourceConnection>
+        </child>
+      </child>
+    </element>
+  </folder>
+</archimate:model>
